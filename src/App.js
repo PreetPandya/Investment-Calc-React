@@ -10,8 +10,18 @@ function App() {
   const [result, setResult] = useState();
 
   function calculateFV() {
-    if (initialInvestment === 0 && annualInvestment === 0 && expectedReturn === 0 && duration === 0) {
-      alert("All values cannot be 0");
+    if (
+      initialInvestment === 0 &&
+      annualInvestment === 0 &&
+      expectedReturn === 0 &&
+      duration === 0
+    ) {
+      alert("All values cannot be 0.");
+      return;
+    }
+
+    if (duration > 100) {
+      alert("Max Duration Is 100 Years.");
       return;
     }
 
@@ -23,9 +33,9 @@ function App() {
       const rhs = annualInvestment * ((part1 - 1) / (expectedReturn / 100));
       const futureValue = lhs + rhs;
       var currentDate = new Date();
-      var currentYear = currentDate.getFullYear()-1;
+      var currentYear = currentDate.getFullYear() - 1;
       let newCurrentYear = currentYear + i;
-      newResult.push({ i, value: futureValue.toFixed(2), newCurrentYear});
+      newResult.push({ i, value: futureValue.toFixed(2), newCurrentYear });
     }
 
     setResult(newResult);
@@ -41,7 +51,10 @@ function App() {
 
   const formatCurrency = (value) => {
     // Assuming you want to format the value as ₹ with commas for thousands separator
-    return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(value);
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+    }).format(value);
   };
 
   return (
@@ -94,12 +107,15 @@ function App() {
         </p>
         <p className="btn">
           <button onClick={calculateFV}>Calculate</button>
-          <button id="reset" onClick={resetValues}>Reset</button>
+          <button id="reset" onClick={resetValues}>
+            Reset
+          </button>
         </p>
         {result &&
           result.map((item) => (
             <p className="list" key={item.i}>
-              Year : {item.newCurrentYear} | Future Value : {formatCurrency(item.value)}
+              Year : {item.newCurrentYear} | Future Value :{" "}
+              {formatCurrency(item.value)}
             </p>
           ))}
       </div>
