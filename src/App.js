@@ -96,7 +96,7 @@ function App() {
         {result &&
           result.map((item) => (
             <p className="list" key={item.i}>
-              Year: {item.i} Future Value: {formatCurrency(item.value)}
+              Year : {item.i} | Future Value : {formatCurrency(item.value)}
             </p>
           ))}
       </div>
