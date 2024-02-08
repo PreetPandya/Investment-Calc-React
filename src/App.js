@@ -22,7 +22,10 @@ function App() {
       const lhs = initialInvestment * part1;
       const rhs = annualInvestment * ((part1 - 1) / (expectedReturn / 100));
       const futureValue = lhs + rhs;
-      newResult.push({ i, value: futureValue.toFixed(2) });
+      var currentDate = new Date();
+      var currentYear = currentDate.getFullYear()-1;
+      let newCurrentYear = currentYear + i;
+      newResult.push({ i, value: futureValue.toFixed(2), newCurrentYear});
     }
 
     setResult(newResult);
@@ -96,7 +99,7 @@ function App() {
         {result &&
           result.map((item) => (
             <p className="list" key={item.i}>
-              Year : {item.i} | Future Value : {formatCurrency(item.value)}
+              Year : {item.newCurrentYear} | Future Value : {formatCurrency(item.value)}
             </p>
           ))}
       </div>
